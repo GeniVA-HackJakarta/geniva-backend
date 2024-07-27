@@ -27,4 +27,6 @@ func ConfigureRouter(router *gin.Engine) {
 	apis.GET("/restaurant", handlers.GetAllRestaurants)
 	apis.GET("/restaurant/:id", handlers.GetRestaurant)
 
+	// AI Handler
+	apis.POST("/ai", handlers.CallAIHandler)
 }
