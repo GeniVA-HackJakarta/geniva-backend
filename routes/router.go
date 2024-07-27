@@ -36,4 +36,7 @@ func ConfigureRouter(router *gin.Engine) {
 
 	// AI Handler
 	apis.POST("/ai/:user_id", handlers.CallAIHandler)
+
+	// Final Price + Saving Handler
+	apis.POST("/price/calculate", handlers.CalculateFinalPrice)
 }
