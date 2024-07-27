@@ -1,6 +1,7 @@
 package main
 
 import (
+	"geniva/config"
 	middlewares "geniva/middlewares"
 	"geniva/routes"
 	initializers "geniva/utils"
@@ -16,7 +17,7 @@ func init() {
 func main() {
 	router := gin.Default()
 	router.Use(middlewares.CorsMiddleware())
-
+	config.Connect()
 	routes.ConfigureRouter(router)
 	port := os.Getenv("PORT")
 	if port == "" {

@@ -32,4 +32,6 @@ func Connect() {
 	}
 
 	repository.InitRepository(db)
+
+	DB = db
 }
