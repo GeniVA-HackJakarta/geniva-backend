@@ -10,6 +10,10 @@ func ConfigureRouter(router *gin.Engine) {
 	router.GET("/api", handlers.MainHandler)
 	apis := router.Group("/api")
 
+	// Auth Controller
+	apis.POST("/auth/register", handlers.Register)
+	apis.POST("/auth/login", handlers.Login)
+
 	// User Handler
 	apis.GET("/user", handlers.GetAllUsers)
 	apis.GET("/user/:id", handlers.GetUser)

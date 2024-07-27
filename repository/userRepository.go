@@ -9,6 +9,8 @@ import (
 type UserRepository interface {
 	GetAll() ([]models.User, error)
 	GetByID(id int) (models.User, error)
+	GetUserByEmail(email string) (models.User, error)
+	SaveUser(user *models.User) error
 }
 
 type userRepo struct {
@@ -31,3 +33,13 @@ func (repo *userRepo) GetByID(id int) (models.User, error) {
 	return user, result.Error
 }
 
+func (repo *userRepo) GetUserByEmail(email string) (models.User, error) {
+	var user models.User
+	result := repo.db.Where("email = ?", email).First(&user)
+	return user, result.Error
+}
+
+func (repo *userRepo) SaveUser(user *models.User) error {
+	result := repo.db.Create(user)
+	return result.Error
+}
