@@ -1,10 +1,14 @@
 package models
 
 type AIRequest struct {
-	Input string `json:"input"`
+	Query string `json:"query"`
 }
 
 type AIResponse struct {
-	Type   int    `json:"type"`
-	Output string `json:"output"`
+	Message struct {
+		Input       string `json:"input"`
+		Output      []int  `json:"output"`
+		Description string `json:"description"`
+		Type        string `json:"type"`
+	} `json:"message"`
 }

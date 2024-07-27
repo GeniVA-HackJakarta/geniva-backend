@@ -10,6 +10,7 @@ type UserRepository interface {
 	GetAll() ([]models.User, error)
 	GetByID(id int) (models.User, error)
 	GetUserByEmail(email string) (models.User, error)
+	GetUserByID(id int) (*models.User, error)
 	SaveUser(user *models.User) error
 	UpdateKYC(id int, saving string) error
 }
@@ -38,6 +39,14 @@ func (repo *userRepo) GetUserByEmail(email string) (models.User, error) {
 	var user models.User
 	result := repo.db.Where("email = ?", email).First(&user)
 	return user, result.Error
+}
+
+func (repo *userRepo) GetUserByID(id int) (*models.User, error) {
+	var user models.User
+	if err := repo.db.First(&user, id).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (repo *userRepo) SaveUser(user *models.User) error {

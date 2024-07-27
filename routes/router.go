@@ -35,5 +35,5 @@ func ConfigureRouter(router *gin.Engine) {
 	apis.POST("/order", handlers.CreateOrder)
 
 	// AI Handler
-	apis.POST("/ai", handlers.CallAIHandler)
+	apis.POST("/ai/:user_id", handlers.CallAIHandler)
 }
