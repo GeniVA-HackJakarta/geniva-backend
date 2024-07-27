@@ -11,4 +11,5 @@ type History struct {
 	Destination    string    `json:"destination"`
 	Fare           float64   `json:"fare"`
 	Status         string    `json:"status"`
+	FoodItemID     int      `json:"food_item_id,omitempty"`
 }

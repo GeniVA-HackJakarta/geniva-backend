@@ -26,15 +26,16 @@ CREATE TABLE IF NOT EXISTS Histories (
     destination VARCHAR(255) NOT NULL,
     fare NUMERIC(10, 2) NOT NULL,
     status VARCHAR(50) NOT NULL,
+    food_item_id INT,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
-INSERT INTO Histories (user_id, service_type, pickup_location, destination, fare, status) VALUES
-(2, 'GrabBike', '123 Main St', '456 Elm St', 15000.75, 'completed'),
-(2, 'GrabCar', '789 Oak St', '101 Pine St', 25000.50, 'completed'),
-(2, 'GrabFood', '135 Second St', '246 Third St', 50000.00, 'pending'),
-(2, 'GrabBike', '369 Fifth St', '481 Sixth St', 10000.25, 'cancelled'),
-(2, 'GrabCar', '753 Seventh St', '864 Eighth St', 30000.00, 'completed');
+INSERT INTO Histories (user_id, service_type, pickup_location, destination, fare, status, food_item_id) VALUES
+(2, 'GrabBike', '123 Main St', '456 Elm St', 15000.75, 'completed', NULL),
+(2, 'GrabCar', '789 Oak St', '101 Pine St', 25000.50, 'completed', NULL),
+(2, 'GrabFood', '135 Second St', '246 Third St', 50000.00, 'pending', 1),
+(2, 'GrabBike', '369 Fifth St', '481 Sixth St', 10000.25, 'cancelled', NULL),
+(2, 'GrabCar', '753 Seventh St', '864 Eighth St', 30000.00, 'completed', NULL);
 
 CREATE TABLE IF NOT EXISTS Drivers (
     id SERIAL PRIMARY KEY,

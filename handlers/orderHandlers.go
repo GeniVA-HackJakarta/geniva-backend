@@ -20,7 +20,7 @@ type CreateOrderRequest struct {
 	DiscountName   string  `json:"discount_name"`
 	FinalPrice     float64 `json:"final_price"`
 	Status         string  `json:"status"`
-	OrderType      string  `json:"order_type"` // "bike", "car", "food"
+	OrderType      string  `json:"order_type"`
 	PickupLocation string  `json:"pickup_location"`
 	Destination    string  `json:"destination"`
 }
@@ -61,6 +61,7 @@ func CreateOrder(c *gin.Context) {
 		Destination:    req.Destination,
 		Fare:           req.FinalPrice,
 		Status:         req.Status,
+		FoodItemID:     req.FoodItemID,
 	}
 
 	err = repository.HistoryRepo.SaveHistory(&history)

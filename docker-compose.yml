@@ -6,7 +6,7 @@ services:
             - .env
         container_name: geniva-backend
         ports:
-            - ${PORT}:${PORT}
+            - "8080:8080"
         networks:
             - geniva-network
         depends_on:
