@@ -7,4 +7,5 @@ type User struct {
 	Password    string `json:"password"`
 	PhoneNumber string `json:"phone_number"`
 	KYC         bool   `json:"kyc"`
+	Saving      string `json:"saving"`
 }

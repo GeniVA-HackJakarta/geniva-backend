@@ -17,6 +17,7 @@ func ConfigureRouter(router *gin.Engine) {
 	// User Handler
 	apis.GET("/user", handlers.GetAllUsers)
 	apis.GET("/user/:id", handlers.GetUser)
+	apis.PUT("/user/:id/kyc", handlers.UpdateKYC)
 
 	// Menu Handler
 	apis.GET("/menu", handlers.GetAllMenus)

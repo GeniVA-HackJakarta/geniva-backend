@@ -11,6 +11,7 @@ type UserRepository interface {
 	GetByID(id int) (models.User, error)
 	GetUserByEmail(email string) (models.User, error)
 	SaveUser(user *models.User) error
+	UpdateKYC(id int, saving string) error
 }
 
 type userRepo struct {
@@ -41,5 +42,10 @@ func (repo *userRepo) GetUserByEmail(email string) (models.User, error) {
 
 func (repo *userRepo) SaveUser(user *models.User) error {
 	result := repo.db.Create(user)
+	return result.Error
+}
+
+func (repo *userRepo) UpdateKYC(id int, saving string) error {
+	result := repo.db.Model(&models.User{}).Where("id = ?", id).Updates(map[string]interface{}{"kyc": true, "saving": saving})
 	return result.Error
 }
