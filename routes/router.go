@@ -31,6 +31,9 @@ func ConfigureRouter(router *gin.Engine) {
 	apis.GET("/history/:user_id", handlers.GetHistoryByUserID)
 	apis.POST("/history", handlers.SaveHistory)
 
+	// Order Handler
+	apis.POST("/order", handlers.CreateOrder)
+
 	// AI Handler
 	apis.POST("/ai", handlers.CallAIHandler)
 }

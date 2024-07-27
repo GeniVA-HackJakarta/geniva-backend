@@ -7,6 +7,8 @@ var (
 	MenuRepo       MenuRepository
 	RestaurantRepo RestaurantRepository
 	HistoryRepo    HistoryRepository
+	OrderRepo      OrderRepository
+	DriverRepo     DriverRepository
 )
 
 func InitRepository(db *gorm.DB) {
@@ -14,4 +16,6 @@ func InitRepository(db *gorm.DB) {
 	MenuRepo = NewMenuRepository(db)
 	RestaurantRepo = NewRestaurantRepository(db)
 	HistoryRepo = NewHistoryRepository(db)
+	OrderRepo = NewOrderRepository(db)
+	DriverRepo = NewDriverRepository(db)
 }
