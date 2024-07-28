@@ -88,6 +88,13 @@ func CallAIHandler(c *gin.Context) {
 		return
 	}
 
+	var stepsDescription string
+	if aiResponse.Message.Transit != nil {
+		for i, step := range aiResponse.Message.Transit.Steps {
+			stepsDescription += fmt.Sprintf("%d. Naik %s dengan jarak %s dengan durasi %s dengan harga %s\n", i+1, step.Type, step.Distance, step.Duration, step.Price)
+		}
+	}
+
 	fmt.Println("AI Response Struct:", aiResponse)
 
 	c.JSON(http.StatusOK, gin.H{
@@ -95,5 +102,7 @@ func CallAIHandler(c *gin.Context) {
 		"description": aiResponse.Message.Description,
 		"type":        aiResponse.Message.Type,
 		"menus":       menus,
+		"transit":     aiResponse.Message.Transit,
+		"grab-ride":   aiResponse.Message.GrabRide,
 	})
 }
