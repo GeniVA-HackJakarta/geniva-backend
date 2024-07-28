@@ -28,7 +28,7 @@ type CreateOrderRequest struct {
 func CreateOrder(c *gin.Context) {
 	var req CreateOrderRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "Invalid request"})
 		return
 	}
 
@@ -49,7 +49,7 @@ func CreateOrder(c *gin.Context) {
 
 	err := repository.OrderRepo.CreateOrder(&order)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create order"})
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to create order"})
 		return
 	}
 
@@ -66,7 +66,7 @@ func CreateOrder(c *gin.Context) {
 
 	err = repository.HistoryRepo.SaveHistory(&history)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create order history"})
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to create order history"})
 		return
 	}
 
@@ -77,13 +77,13 @@ func GetOrderHistory(c *gin.Context) {
 	userIDParam := c.Param("user_id")
 	userID, err := strconv.Atoi(userIDParam)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "Invalid user ID"})
 		return
 	}
 
 	orders, err := repository.OrderRepo.GetOrdersByUserId(userID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get order history"})
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to get order history"})
 		return
 	}
 

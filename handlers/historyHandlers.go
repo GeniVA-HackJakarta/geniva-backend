@@ -46,13 +46,13 @@ func SaveHistory(c *gin.Context) {
 func GetHistoryByUserID(c *gin.Context) {
 	userID, err := strconv.Atoi(c.Param("user_id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "Invalid user ID"})
 		return
 	}
 
 	history, err := repository.HistoryRepo.GetHistoryByUserID(userID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve history"})
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to retrieve history"})
 		return
 	}
 

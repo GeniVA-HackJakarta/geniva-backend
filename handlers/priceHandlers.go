@@ -17,13 +17,13 @@ func CalculateFinalPrice(c *gin.Context) {
 	var request PriceRequest
 
 	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "Invalid request"})
 		return
 	}
 
 	user, err := repository.UserRepo.GetUserByID(request.UserID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve user"})
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to retrieve user"})
 		return
 	}
 
