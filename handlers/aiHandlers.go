@@ -22,7 +22,9 @@ func CallAIHandler(c *gin.Context) {
 	}
 
 	var request struct {
-		InputString string `json:"input_string"`
+		InputString string  `json:"input_string,omitempty"`
+		Lat         float64 `json:"lat,omitempty"`
+		Lon         float64 `json:"lon,omitempty"`
 	}
 
 	if err := c.ShouldBindJSON(&request); err != nil {
@@ -36,8 +38,15 @@ func CallAIHandler(c *gin.Context) {
 		return
 	}
 
-	modifiedInputString := fmt.Sprintf("Nama: %s, %s", user.Name, request.InputString)
-	aiRequest := models.AIRequest{Query: modifiedInputString}
+	var modifiedInputString string
+	if request.InputString != "" {
+		modifiedInputString = fmt.Sprintf("Nama: %s, %s", user.Name, request.InputString)
+	}
+	aiRequest := models.AIRequest{
+		Query: modifiedInputString,
+		Lat:   request.Lat,
+		Lon:   request.Lon,
+	}
 	jsonValue, err := json.Marshal(aiRequest)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "Failed to marshal request"})
